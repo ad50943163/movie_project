@@ -1,0 +1,5 @@
+.idea/*
+.idea*
+\.idea*
+/app/static/tpl/
+/app/static/uploads/
