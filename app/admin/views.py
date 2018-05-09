@@ -109,9 +109,7 @@ def pwd():
         data = form.data
         admin = Admin.query.filter_by(name=session['admin']).first()
         from werkzeug.security import generate_password_hash
-        print(admin.pwd)
         admin.pwd = generate_password_hash(data['new_pwd'])
-        print(admin.pwd)
         db.session.add(admin)
         db.session.commit()
         flash('修改成功！请使用新密码登录', 'OK')
@@ -422,16 +420,17 @@ def user_del(id=None):
 def comment_list(page=None):
     if page is None:
         page = 1
-    page_data = Moviecol.query.join(
+    page_data = Comment.query.join(
         Movie
     ).join(
         User
     ).filter(
-        Movie.id == Moviecol.movie_id,
-        User.id == Moviecol.user_id
+        Movie.id == Comment.movie_id,
+        User.id == Comment.user_id
     ).order_by(
-        Moviecol.addtime.desc()
+        Comment.addtime.desc()
     ).paginate(page, per_page=10)
+
     return render_template('admin/comment_list.html', page_data=page_data)
 
 
@@ -452,15 +451,15 @@ def comment_del(id=None):
 def moviecol_list(page=None):
     if page is None:
         page = 1
-    page_data = Comment.query.join(
+    page_data = Moviecol.query.join(
         Movie
     ).join(
         User
     ).filter(
-        Movie.id == Comment.movie_id,
-        User.id == Comment.user_id
+        Movie.id == Moviecol.movie_id,
+        User.id == Moviecol.user_id
     ).order_by(
-        Comment.addtime.desc()
+        Moviecol.addtime.desc()
     ).paginate(page, per_page=10)
     return render_template('admin/moviecol_list.html', page_data=page_data)
 
