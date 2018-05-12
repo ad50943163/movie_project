@@ -137,12 +137,12 @@ def tag_add():
         oplog = Oplog(
             admin_id=session['admin_id'],
             ip=request.remote_addr,
-            reason='添加标签%s' % (data['name'])
+            reson='添加标签%s' % (data['name'])
         )
         db.session.add(oplog)
         db.session.commit()
         # return redirect(url_for('admin.tag_add'))
-        return redirect(url_for('admin.tag_list'))
+        return redirect(url_for('admin.tag_list',page=1))
     return render_template('admin/tag_add.html', form=form)
 
 

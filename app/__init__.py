@@ -12,13 +12,14 @@ from flask_wtf.csrf import CSRFProtect
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:@127.0.0.1:3306/movie"
+# app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:@127.0.0.1:3306/movie"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:root@207.246.87.39:3306/movie"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SECRET_KEY'] = "HelloWorld"
 app.config['UP_DIR'] = os.path.join(os.path.abspath(os.path.dirname(__file__)),'static/uploads/')
 app.config['FC_DIR'] = os.path.join(os.path.abspath(os.path.dirname(__file__)),'static/uploads/users/')
 
-app.debug = False
+app.debug = True
 db = SQLAlchemy(app)
 
 from app.home import home as home_blueprint
