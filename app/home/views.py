@@ -74,6 +74,7 @@ def regist():
         db.session.add(user)
         db.session.commit()
         flash('注册成功','OK')
+        return redirect(url_for('home.login'))
     return render_template('home/regist.html',form=form)
 
 # 会员修改资料
